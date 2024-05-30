@@ -47,3 +47,14 @@ tox -e app
 
 Для обучения использовался датасет:
 https://www.kaggle.com/datasets/mrdaniilak/russia-real-estate-20182021
+
+# Docker
+
+
+```
+docker build docker  -t m-model:latest
+```
+
+```
+docker run -p 8001:8001 -e PORT=8001 m-model
+```
