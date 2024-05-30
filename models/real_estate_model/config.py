@@ -38,7 +38,7 @@ def fetch_config_from_yaml(cfg_path: Path = None) -> YAML:
     raise OSError(f"Did not find config file at path: {cfg_path}")
 
 
-def set_config_field(field_name: str, value: str, cfg_path: Path = None):
+def set_config_field(field_name: str, value: str, cfg_path: Path = None) -> None:
     if not cfg_path:
         cfg_path = CONFIG_FILE_PATH
 
