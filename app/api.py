@@ -7,7 +7,7 @@ from models.real_estate_model.predict import predict_raw, load_model
 from models.real_estate_model.train import train
 from models.real_estate_model.config import set_config_field
 
-from schemas.predict import NnInput
+from app.schemas.predict import NnInput
 
 
 api_router = FastAPI()

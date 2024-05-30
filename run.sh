@@ -1,1 +1,1 @@
-uvicorn app.main:app --host 0.0.0.0 --port $PORT
+uvicorn app.api:api_router --host 0.0.0.0 --port $PORT
