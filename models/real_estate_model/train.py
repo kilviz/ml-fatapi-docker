@@ -4,9 +4,10 @@ from pathlib import Path
 
 import lightgbm as lgb
 from pandas import read_csv
-from models.real_estate_model.config import Config, fetch_config_from_yaml
 from sklearn.metrics import r2_score
 from sklearn.model_selection import train_test_split
+
+from models.real_estate_model.config import Config, fetch_config_from_yaml
 
 
 def calc_metrics(actual, pred, suffix):
