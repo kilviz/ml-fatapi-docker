@@ -52,9 +52,9 @@ https://www.kaggle.com/datasets/mrdaniilak/russia-real-estate-20182021
 
 
 ```
-docker build docker  -t m-model:latest
+docker build docker  -t ml_model:latest
 ```
 
 ```
-docker run -p 8001:8001 -e PORT=8001 m-model
+docker run -p 8001:8001 -e PORT=8001 ml_model
 ```

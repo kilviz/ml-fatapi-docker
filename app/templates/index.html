@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
+    <title>Predict API Form</title>
+    <style>
+        :root {
+            --black: #2b2a2c;
+            --gray: #6a696b;
+            --gray-light: #dedede;
+            --white: #ffffff;
+            --primary-color: #4CAF50;
+            --secondary-color: #f5f5f5;
+        }
+        
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--black);
+            background-color: var(--white);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            padding: 1.2rem 0;
+        }
+        
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .user_name {
+            font-size: 1rem;
+            color: var(--white);
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-right: 1rem;
+        }
+        
+        .nav_link, .nav_git {
+            color: var(--white);
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+            margin-left: 1rem;
+        }
+        
+        .nav_link:hover, .nav_git:hover {
+            color: var(--gray-light);
+        }
+        
+        .intro {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+            justify-content: space-around;
+            background-color: var(--secondary-color);
+            flex: 1;
+        }
+        
+        .intro h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .intro h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        form {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        
+        form input {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--gray-light);
+            border-radius: 4px;
+        }
+        
+        form button {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 4px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        
+        form button:hover {
+            background-color: darken(var(--primary-color), 10%);
+        }
+        
+        footer {
+            background-color: var(--black);
+            color: var(--gray-light);
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: auto;
+        }
+        
+        @media (min-width: 768px) {
+            .intro {
+                flex-direction: row;
+                justify-content: space-between;
+                padding: 3rem;
+            }
+            
+            .intro h1 {
+                font-size: 2.5rem;
+                margin-left: 2rem;
+            }
+            
+            form {
+                margin-left: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="user_content">
+                <div class="user_name">Predict API Form</div>
+            </div>
+            <nav class="nav">
+                <a class="nav_link" href="https://github.com/kilviz/ml-fatapi-docker">GitHub</a>
+            </nav>
+        </div>
+    </header>
+    <div class="intro">
+        <form id="predictForm">
+            <label for="geo_lat">Введите широту:</label>
+            <input type="number" id="geo_lat" name="geo_lat" step="any" required><br><br>
+    
+            <label for="geo_lon">Введите долготу:</label>
+            <input type="number" id="geo_lon" name="geo_lon" step="any" required><br><br>
+    
+            <label for="level">Введите этаж:</label>
+            <input type="number" id="level" name="level" required><br><br>
+    
+            <label for="levels">Введите общее количество этажей:</label>
+            <input type="number" id="levels" name="levels" required><br><br>
+    
+            <label for="rooms">Введите количество комнат:</label>
+            <input type="number" id="rooms" name="rooms" required><br><br>
+    
+            <label for="area">Введите площадь:</label>
+            <input type="number" id="area" name="area" step="any" required><br><br>
+    
+            <label for="object_type">Введите тип здания:</label>
+            <input type="number" id="object_type" name="object_type" required><br><br>
+    
+            <button type="submit">Отправить</button>
+        </form>
+        <div>
+            <h2>Тренировака модели</h2>
+            <form id="trainForm" action="/train", method="post" nsubmit="submitForm(event, 'trainForm', 'trainNotification')">
+                <button type="click">Тренировать</button>
+            </form>
+            <div id="trainNotification" style="display: none;">Тренировка успешно завершена!</div>
+            
+            <h2>Смена модели</h2>
+            <form id="changeModelForm" action="/change_model", method="post" onsubmit="submitForm(event, 'changeModelForm', 'modelNotification')">
+                <label for="filepath">Введите путь к файлу:</label>
+                <input type="text" id="filepath" name="filepath" required=""><br><br>
+                <button type="submit">Сменить модель</button>
+            </form>
+            <div id="modelNotification" style="display: none;">Модель успешно изменена!</div>
+        
+            <h2>Изменить количество итераций</h2>
+            <form id="changeIterationsForm" action="/change_iterations" method="post" onsubmit="submitForm(event, 'changeIterationsForm', 'iterationsNotification')">
+                <label for="iter_num">Введите количество итераций</label>
+                <input type="number" id="iter_num" name="iter_num" required=""><br><br>
+                <button type="submit">Изменить итерации</button>
+            </form>
+            <div id="iterationsNotification" style="display: none;">Итерации успешно изменены!</div>
+        </div>
+    </div>
+    <footer>
+    </footer>
+    <script>
+        document.getElementById('predictForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const formData = new FormData(form);
+            const jsonData = {};
+            
+            formData.forEach((value, key) => {
+                jsonData[key] = value;
+            });
+
+            try {
+                const response = await fetch('http://localhost:8001/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(jsonData)
+                });
+
+                const result = await response.json();
+                alert('Response: ' + JSON.stringify(result));
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        });
+        async function submitForm(event, formId, notificationId) {
+            event.preventDefault();
+    
+            const form = document.getElementById(formId);
+            const formData = new FormData(form);
+    
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: formData
+                });
+    
+                if (response.ok) {
+                    const notification = document.getElementById(notificationId);
+                    notification.style.display = 'block';
+                    
+                    form.reset();
+                    
+                    setTimeout(() => {
+                        notification.style.display = 'none';
+                    }, 3000);
+                } else {
+                    console.error('Ошибка при отправке формы', response.status);
+                }
+            } catch (error) {
+                console.error('Ошибка при отправке формы', error);
+            }
+        }
+    </script>
+</body>
+</html>
